@@ -46,7 +46,7 @@ export default function ViewSharedTrivias() {
 
   useEffect(() => {
     fetchSharedTrivias(router, setSharedTrivias, setLoading);
-  }, []);
+  }, [router]);
 
   const handleDelete = async (triviaId: string) => {
     const user = await getAuthenticatedUser();

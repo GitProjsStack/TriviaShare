@@ -54,7 +54,16 @@ export async function fetchMatchingUsersBySimilarName(name: string): Promise<Sha
     return [];
   }
 
-  return (data as any[]).map(toShareRecipient);
+  if (!data || !Array.isArray(data)) {
+    console.error(`❌ Error fetching users by name ${name}. No data returned`);
+    return [];
+  }
+
+  return ((data as unknown) as {
+    [COL_CREATOR_ID]: string;
+    [COL_USERNAME]: string;
+    [COL_PROFILE_PIC]: string | null;
+  }[]).map(toShareRecipient);
 }
 
 // Signs the user out and optionally performs a callback afterward
