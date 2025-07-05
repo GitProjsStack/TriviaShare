@@ -10,7 +10,7 @@ import {
     updateTriviaSharedWithUser,
     getTriviaById,
 } from '@/app/supabasefuncs/helperSupabaseFuncs';
-import { ShareRecipient, TriviaParams } from '@/app/interfaces/triviaTypes';
+import { ShareRecipient } from '@/app/interfaces/triviaTypes';
 
 import '../../../cssStyling/shareTrivia.css';
 import ProfilePicture from '@/app/components/ProfilePicture';
