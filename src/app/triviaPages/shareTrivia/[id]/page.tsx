@@ -18,7 +18,7 @@ import ProfilePicture from '@/app/components/ProfilePicture';
 export default function ShareTriviaPage() {
     const router = useRouter();
     const params = useParams() as TriviaParams;
-    const triviaid = params.id;
+    const triviaid = params?.id;
 
     const [triviaTitle, setTriviaTitle] = useState<string>('');
     const [query, setQuery] = useState('');
