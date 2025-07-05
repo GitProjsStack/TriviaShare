@@ -4,7 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { TPlayer } from '@/app/interfaces/triviaTypes';
 import { getWinners } from '@/app/components/getWinners';
-import '../../cssStyling/triviaEndScreen.css';
+import '../cssStyling/triviaEndScreen.css';
 import { BUTTON_LABELS } from '@/app/constants/gameSettings';
 
 interface TriviaEndScreenProps {
