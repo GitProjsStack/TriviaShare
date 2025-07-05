@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { BUTTON_LABELS } from '@/app/constants/gameSettings';
 import {
@@ -15,10 +15,12 @@ import { ShareRecipient, TriviaParams } from '@/app/interfaces/triviaTypes';
 import '../../../cssStyling/shareTrivia.css';
 import ProfilePicture from '@/app/components/ProfilePicture';
 
-export default function ShareTriviaPage() {
+type ShareTriviaClientProps = {
+  triviaid: string;
+};
+
+export default function ShareTriviaPageClient({ triviaid }: ShareTriviaClientProps) {
     const router = useRouter();
-    const params = useParams() as TriviaParams;
-    const triviaid = params?.id;
 
     const [triviaTitle, setTriviaTitle] = useState<string>('');
     const [query, setQuery] = useState('');

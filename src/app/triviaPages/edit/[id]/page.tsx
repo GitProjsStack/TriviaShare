@@ -1,6 +1,6 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import {
     getTriviaById,
@@ -15,8 +15,9 @@ const prevPagePath = '../createEditTrivias';
 const indexToLetter = (i: number) => String.fromCharCode(65 + i);
 const generateChoice = () => ({ id: crypto.randomUUID(), text: '' });
 
-export default function EditTrivia() {
-    const { id } = useParams() as { id: string };
+type EditTriviaProps = { id: string };
+
+export default function EditTriviaPageClient({ id }: EditTriviaProps) {
     const router = useRouter();
 
     const [trivia, setTrivia] = useState<TriviaGame | null>(null);

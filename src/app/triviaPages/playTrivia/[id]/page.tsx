@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { getTriviaById } from '@/app/supabasefuncs/helperSupabaseFuncs';
 import { 
     MIN_PLAYERS,
@@ -13,8 +13,7 @@ import {
     TPlayer,
     TQuestion,
     TChoice,
-    TriviaContent,
-    TriviaParams
+    TriviaContent
 } from '@/app/interfaces/triviaTypes';
 import {
     getCurrentStealer,
@@ -28,10 +27,12 @@ import '../../../cssStyling/playTrivia.css';
 
 const COLORS = EDIT_TRIVIA_LIMITS.COLORS;
 
-export default function PlayTriviaPage() {
+type PlayTriviaPageClientProps = {
+  id: string;
+};
+
+export default function PlayTriviaPageClient({ id }: PlayTriviaPageClientProps) {
     const router = useRouter();
-    const params = useParams() as TriviaParams;
-    const id = params.id;
 
     // Title and trivia content loaded from DB
     const [triviaTitle, setTriviaTitle] = useState<string>('');
