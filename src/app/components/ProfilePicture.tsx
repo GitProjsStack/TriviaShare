@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
+import Image from 'next/image';
 import {
   getAuthenticatedUser,
   getUSERProfile,
@@ -98,9 +99,16 @@ export default function ProfilePicture({ src, alt = 'User profile picture', clic
         onClick={() => clickable && fileInputRef.current?.click()}
       >
         {finalSrc ? (
-          <img src={finalSrc} alt={alt} className="profile-pic-image" />
+          <Image
+            src={finalSrc}
+            alt={alt}
+            className="profile-pic-image"
+            width={150}
+            height={150}
+            style={{ borderRadius: '50%' }}
+            priority={true}  // Optional, if you want to preload image for better LCP
+          />
         ) : (
-          // fallback icon when no pic available
           <div className="profile-placeholder">👤</div>
         )}
       </div>

@@ -1,5 +1,5 @@
 import { supabase } from '../supabase/supabaseClient';
-import { ShareRecipient } from '../interfaces/triviaTypes';
+import { ShareRecipient, TriviaContent } from '../interfaces/triviaTypes';
 
 // Constants for table and column names
 export const CLIENTS_TABLE = 'clients';
@@ -20,7 +20,11 @@ const SELECT_CLIENT_FIELDS = [COL_CREATOR_ID, COL_USERNAME, COL_PROFILE_PIC].joi
 const AVATAR_BUCKET = 'avatars';
 
 // Helper to format a Supabase user row into our ShareRecipient type
-function toShareRecipient(user: any): ShareRecipient {
+function toShareRecipient(user: {
+  [COL_CREATOR_ID]: string;
+  [COL_USERNAME]: string;
+  [COL_PROFILE_PIC]: string | null;
+}): ShareRecipient {
   return {
     id: user[COL_CREATOR_ID],
     username: user[COL_USERNAME],
@@ -50,7 +54,7 @@ export async function fetchMatchingUsersBySimilarName(name: string): Promise<Sha
     return [];
   }
 
-  return data.map(toShareRecipient);
+  return (data as any[]).map(toShareRecipient);
 }
 
 // Signs the user out and optionally performs a callback afterward
@@ -191,7 +195,7 @@ export async function createTriviaGame(trivia: {
   creator_id: string;
   title: string;
   status: string;
-  content: any;
+  content: TriviaContent;
 }): Promise<{ success: boolean; triviaId?: string; createdAt?: string; error?: string }> {
   const { data, error } = await supabase
     .from(TRIVIA_TABLE)
@@ -243,7 +247,7 @@ export async function getTriviaById(id: string) {
 }
 
 // Replaces the content field of a trivia
-export async function updateTriviaContent(triviaId: string, content: any) {
+export async function updateTriviaContent(triviaId: string, content: TriviaContent) {
   const { data, error } = await supabase
     .from(TRIVIA_TABLE)
     .update({ content })
@@ -284,7 +288,7 @@ export async function deleteTriviaById(triviaId: string): Promise<{ success: boo
   if (clientsError || !clients) return { success: true };
 
   for (const client of clients) {
-    const updates: Record<string, any> = {};
+    const updates: Record<string, string[] | undefined> = {};
 
     if (Array.isArray(client[COL_MY_TRIVIA])) {
       const updatedMyTrivia = client[COL_MY_TRIVIA].filter((id: string) => id !== triviaId);

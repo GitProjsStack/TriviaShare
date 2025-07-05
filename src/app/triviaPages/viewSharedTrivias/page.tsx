@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import {
   getAuthenticatedUser,
   getSharedTriviasWithSharerInfo,
@@ -12,38 +13,39 @@ import { SharedTrivia } from '@/app/interfaces/triviaTypes';
 import '../../cssStyling/viewSharedTrivias.css';
 import { BUTTON_LABELS } from '@/app/constants/gameSettings';
 
+const fetchSharedTrivias = async (
+  router: ReturnType<typeof useRouter>,
+  setSharedTrivias: React.Dispatch<React.SetStateAction<SharedTrivia[]>>,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  setLoading(true);
+  const user = await getAuthenticatedUser();
+  if (!user) {
+    router.push('/login');
+    return;
+  }
+  const data = await getSharedTriviasWithSharerInfo(user.id);
+  const updatedData = await Promise.all(
+    data.map(async (trivia) => {
+      if (trivia.sharerProfilePicUrl) {
+        const signedUrl = await generateUSERProfilePicSignedUrl(trivia.sharerProfilePicUrl, 3600);
+        return { ...trivia, sharerProfilePicUrl: signedUrl };
+      }
+      return trivia;
+    })
+  );
+  setSharedTrivias(updatedData);
+  setLoading(false);
+};
+
 export default function ViewSharedTrivias() {
   const router = useRouter();
   const [sharedTrivias, setSharedTrivias] = useState<SharedTrivia[]>([]);
   const [loading, setLoading] = useState(true);
   const [playLoadingId, setPlayLoadingId] = useState<string | null>(null);
 
-  const fetchSharedTrivias = async () => {
-    setLoading(true);
-    const user = await getAuthenticatedUser();
-    if (!user) {
-      router.push('/login');
-      return;
-    }
-    const data = await getSharedTriviasWithSharerInfo(user.id);
-
-    // Get signed profile picture URLs (if user uploaded one)
-    const updatedData = await Promise.all(
-      data.map(async (trivia) => {
-        if (trivia.sharerProfilePicUrl) {
-          const signedUrl = await generateUSERProfilePicSignedUrl(trivia.sharerProfilePicUrl, 60 * 60); // 1 hour expiry
-          return { ...trivia, sharerProfilePicUrl: signedUrl };
-        }
-        return trivia;
-      })
-    );
-
-    setSharedTrivias(updatedData);
-    setLoading(false);
-  };
-
   useEffect(() => {
-    fetchSharedTrivias();
+    fetchSharedTrivias(router, setSharedTrivias, setLoading);
   }, []);
 
   const handleDelete = async (triviaId: string) => {
@@ -81,10 +83,13 @@ export default function ViewSharedTrivias() {
             <div key={triviaId} className="trivia-card-horizontal">
               <div className="trivia-left">
                 {sharerProfilePicUrl ? (
-                  <img
+                  <Image
                     src={sharerProfilePicUrl}
                     alt={`${sharerUsername}'s profile`}
                     className="sharer-profile-pic"
+                    width={48}
+                    height={48}
+                    priority  // optional but improves LCP
                   />
                 ) : (
                   <div className="sharer-profile-placeholder">

@@ -14,7 +14,7 @@ export default function HowToPlayPage() {
       <section className="section">
         <h2>1. Creating a Trivia Game</h2>
         <p>
-          Head to the '<strong>{BUTTON_LABELS.CREATE_EDIT_SHARE.title}</strong>' section on your dashboard.
+          Head to the &apos;<strong>{BUTTON_LABELS.CREATE_EDIT_SHARE.title}</strong>&apos; section on your dashboard.
           Here, you can build your own trivia game by:
         </p>
         <ul>
@@ -33,19 +33,19 @@ export default function HowToPlayPage() {
         <h2>2. Sharing Trivias</h2>
         <p>
           After saving your trivia, it becomes available to share. Other users can find your trivia under  
-          '<em>{BUTTON_LABELS.PLAY_SHARED.title}</em>'. Sharing enables everyone to enjoy the games you've created!
+          &apos;<em>{BUTTON_LABELS.PLAY_SHARED.title}</em>&apos;. Sharing enables everyone to enjoy the games you&apos;ve created!
         </p>
       </section>
 
       <section className="section">
         <h2>3. Starting and Playing a Game</h2>
         <p>
-          When you're ready to play:
+          When you&apos;re ready to play:
         </p>
         <ol>
           <li>Select a trivia game from the shared list.</li>
           <li>Input the number of players (minimum {MIN_PLAYERS}, maximum {MAX_PLAYERS}).</li>
-          <li>Enter each player's name — you are encouraged to set unique names to avoid confusion.</li>
+          <li>Enter each player&apos;s name — you are encouraged to set unique names to avoid confusion.</li>
           <li>Begin the game, where players take turns answering questions.</li>
           <li>The current player chooses a question and tries to answer it.</li>
         </ol>
@@ -75,7 +75,7 @@ export default function HowToPlayPage() {
       <section className="section">
         <h2>6. Features Overview</h2>
         <ul>
-          <li><strong>Player Score Tracking:</strong> See everyone's points update live after each correct answer or steal.</li>
+          <li><strong>Player Score Tracking:</strong> See everyone&apos;s points update live after each correct answer or steal.</li>
           <li><strong>Round-Robin Turns:</strong> Players take turns in a fixed order, cycling continuously.</li>
           <li><strong>Question Locking:</strong> Questions that are answered or stolen correctly become disabled to avoid repeats.</li>
           <li><strong>Manual Steal Option:</strong> You can choose who gets to steal. This makes the game more interactive.</li>

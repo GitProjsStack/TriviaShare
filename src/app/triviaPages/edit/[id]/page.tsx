@@ -154,7 +154,7 @@ export default function EditTrivia() {
 
     const deleteCategory = async (category: string) => {
         if (!trivia) return;
-        const { [category]: _, ...rest } = trivia.content;
+        const { [category]: _, ...rest } = trivia.content; // eslint-disable-line @typescript-eslint/no-unused-vars
         const updated = { ...trivia, content: rest };
         setTrivia(updated);
 

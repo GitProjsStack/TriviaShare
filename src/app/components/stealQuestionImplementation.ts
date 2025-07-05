@@ -1,11 +1,11 @@
 import { TPlayer } from '../interfaces/triviaTypes';
 
 // Queue of player indices who get to try stealing, excluding the original player who missed
-let stealQueue: number[] = [];
+const stealQueue: number[] = [];
 // Tracks which player in the stealQueue is currently trying to steal
 let stealIndex = 0;
 // The player who originally had the turn (missed the question)
-let originalTurnIndex = 0;
+const originalTurnIndex = 0;
 
 /**
  * Get the player index of who is currently allowed to steal.

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { supabase } from '../app/supabase/supabaseClient';
 import '../app/cssStyling/homepagestyling.css';
@@ -56,7 +57,7 @@ export default function Home() {
       if (user) {
         setSuccessMsg('Signup successful! Please check your email to verify your account.');
       }
-    } 
+    }
     // Handle login
     else {
       const {
@@ -76,10 +77,13 @@ export default function Home() {
 
   return (
     <div className="trivia-container">
-      <img
+      <Image
         src="/triviagame-logo.png"
         alt="TriviaShare Logo"
         className="trivia-logo"
+        width={200}
+        height={200}
+        priority={true}     // optional: loads image with priority for faster LCP
       />
       <h1 className="trivia-title">TriviaShare</h1>
 

@@ -26,7 +26,7 @@ export default function TriviaEndScreen({ players }: TriviaEndScreenProps) {
             <h1 className="end-screen-title">Game Over</h1>
 
             {isTie ? (
-                <h2 className="tie-message">It's a tie! 🏆</h2>
+                <h2 className="tie-message">It&apos;s a tie! 🏆</h2>
             ) : (
                 <h2 className="winner-message">
                     Winner: <span className="winner-name">{winners[0].name}</span> 🎉
