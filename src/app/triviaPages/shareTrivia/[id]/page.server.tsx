@@ -1,5 +1,5 @@
 // page.server.tsx
-import ShareTriviaPageClient from './page';
+import ShareTriviaPageClient from './ShareTriviaPageClient';
 import { getAllTriviaIds } from '@/app/supabasefuncs/helperSupabaseFuncs';
 
 export async function generateStaticParams() {

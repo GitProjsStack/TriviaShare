@@ -1,4 +1,4 @@
-import PlayTriviaPageClient from './page';
+import PlayTriviaPageClient from './PlayTriviaPageClient';
 import { getAllTriviaIds } from '@/app/supabasefuncs/helperSupabaseFuncs';
 
 export async function generateStaticParams() {

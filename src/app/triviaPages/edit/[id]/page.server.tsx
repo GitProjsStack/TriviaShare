@@ -1,4 +1,4 @@
-import EditTriviaPageClient from './page';
+import EditTriviaPageClient from './EditTriviaPageClient';
 import { getAllTriviaIds } from '@/app/supabasefuncs/helperSupabaseFuncs';
 
 export async function generateStaticParams() {
