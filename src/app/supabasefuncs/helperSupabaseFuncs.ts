@@ -32,6 +32,17 @@ function toShareRecipient(user: {
   };
 }
 
+// Get all trivia ids from the table
+export async function getAllTriviaIds(): Promise<string[]> {
+  const { data, error } = await supabase
+    .from(TRIVIA_TABLE)
+    .select('id');
+
+  if (error || !data) return [];
+
+  return data.map((row) => row.id);
+}
+
 // Returns the currently logged-in user or null if not authenticated
 export async function getAuthenticatedUser() {
   const {
